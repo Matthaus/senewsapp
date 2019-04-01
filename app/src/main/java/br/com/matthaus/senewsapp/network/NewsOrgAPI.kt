@@ -11,7 +11,10 @@ import retrofit2.http.Query
 interface NewsOrgAPI {
 
     @GET("top-headlines")
-    fun getHeadlineArticles(@Query("country") country: String): Call<TopHeadlineArticles>
+    fun getHeadlineArticles(@Query("country") country: String, @Query("pageSize") pageSize: Int): Call<TopHeadlineArticles>
+
+    @GET("everything")
+    fun getEverythingArticlesByKeyword(@Query("q") keyword: String, @Query("language") language: String, @Query("page") page: Int): Call<TopHeadlineArticles>
 
     companion object {
         fun getInstance(): NewsOrgAPI {

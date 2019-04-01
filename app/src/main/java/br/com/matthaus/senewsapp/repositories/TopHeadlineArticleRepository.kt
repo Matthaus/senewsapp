@@ -16,8 +16,23 @@ class TopHeadlineArticleRepository {
         this.newsOrgAPI = newsOrgAPI
     }
 
-    fun fetchHeadlineArticles(country: String, body: (List<TopHeadlineArticle>) -> Unit) {
-        newsOrgAPI.getHeadlineArticles(country).enqueue(object : Callback<TopHeadlineArticles> {
+    fun fetchHeadlineArticles(country: String, pageSize: Int, body: (List<TopHeadlineArticle>) -> Unit) {
+        newsOrgAPI.getHeadlineArticles(country, pageSize).enqueue(object : Callback<TopHeadlineArticles> {
+            override fun onFailure(call: Call<TopHeadlineArticles>, t: Throwable) {
+                body(Collections.emptyList())
+            }
+
+            override fun onResponse(
+                call: Call<TopHeadlineArticles>,
+                response: Response<TopHeadlineArticles>
+            ) {
+                body(response.body()?.articles ?: Collections.emptyList())
+            }
+        })
+    }
+
+    fun fetchEverythingArticles(query: String, language: String, page: Int, body: (List<TopHeadlineArticle>) -> Unit) {
+        newsOrgAPI.getEverythingArticlesByKeyword(query, language, page).enqueue(object : Callback<TopHeadlineArticles> {
             override fun onFailure(call: Call<TopHeadlineArticles>, t: Throwable) {
                 body(Collections.emptyList())
             }

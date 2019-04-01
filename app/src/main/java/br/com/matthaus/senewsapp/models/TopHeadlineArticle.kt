@@ -8,7 +8,7 @@ data class TopHeadlineArticle(
     val title: String,
     val description: String,
     val url: String,
-    val urlToImg: String,
+    val urlToImage: String,
     val publishedAt: Date,
     val content: String
 ) {

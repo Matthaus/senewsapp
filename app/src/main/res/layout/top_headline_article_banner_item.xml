@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_height="200dp">
+
+    <ImageView
+            android:id="@+id/top_headline_banner_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:src="@tools:sample/backgrounds/scenic"/>
+
+
+    <View
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/black_gradient_background_banner"/>
+
+    <TextView
+            android:id="@+id/top_headline_banner_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:maxLines="2"
+            android:layout_marginStart="20dp"
+            android:textAlignment="textStart"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="100dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:textSize="24dp"
+            tools:text="Título da notícia"/>
+
+    <ImageView
+            android:id="@+id/top_headline_banner_date_icon"
+            android:layout_width="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/top_headline_banner_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@android:drawable/ic_lock_idle_alarm"
+            android:tint="@color/colorPrimary"
+            />
+
+    <TextView
+            android:id="@+id/top_headline_banner_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/top_headline_banner_date_icon"
+            app:layout_constraintBottom_toBottomOf="@id/top_headline_banner_date_icon"
+            app:layout_constraintStart_toEndOf="@id/top_headline_banner_date_icon"
+            app:layout_constraintEnd_toEndOf="@id/top_headline_banner_title"
+            android:maxLines="2"
+            android:layout_marginStart="5dp"
+            android:textAlignment="textStart"
+            android:layout_marginEnd="100dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:textSize="14dp"
+            tools:text="01/01/0001 - 01:01"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
