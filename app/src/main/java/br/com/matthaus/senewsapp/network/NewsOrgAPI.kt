@@ -1,5 +1,6 @@
 package br.com.matthaus.senewsapp.network
 
+import br.com.matthaus.senewsapp.BuildConfig
 import br.com.matthaus.senewsapp.models.Sources
 import br.com.matthaus.senewsapp.models.TopHeadlineArticles
 import okhttp3.OkHttpClient
@@ -21,23 +22,13 @@ interface NewsOrgAPI {
     fun getSources(@Query("language") language: String): Call<Sources>
 
     companion object {
-        fun getInstance(): NewsOrgAPI {
 
-            var httpClient = OkHttpClient.Builder()
-                .addInterceptor {
-                    val request = it.request().newBuilder()
-                        .addHeader("X-Api-Key", "9812096f70f64557aa1f7a5525eee940")
-                        .build()
-
-                    it.proceed(request)
-                }
-                .build()
-
+        fun getInstance(okHttpClient: OkHttpClient): NewsOrgAPI {
 
             return Retrofit
                 .Builder()
-                .client(httpClient)
-                .baseUrl("https://newsapi.org/v2/")
+                .client(okHttpClient)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(NewsOrgAPI::class.java)

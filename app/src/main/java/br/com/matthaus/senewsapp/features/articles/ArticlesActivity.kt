@@ -11,16 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.matthaus.senewsapp.R
 import br.com.matthaus.senewsapp.features.articles.adapters.TopHeadlineBannerAdapter
 import br.com.matthaus.senewsapp.features.articles.adapters.TopHeadlineListAdapter
-import br.com.matthaus.senewsapp.viewmodel.NewsViewModel
+import br.com.matthaus.senewsapp.viewmodel.ArticlesViewModel
 import kotlinx.android.synthetic.main.activity_articles.*
 import kotlinx.android.synthetic.main.loader.*
+import org.koin.android.ext.android.inject
 
 const val SOURCE_ID_EXTRA = "SOURCE_ID_EXTRA"
 
 class ArticlesActivity : AppCompatActivity() {
 
-    private val newsViewModel: NewsViewModel by lazy {
-        ViewModelProviders.of(this, NewsViewModel.NewsViewModelFactory()).get(NewsViewModel::class.java)
+    val articlesViewModelFactory: ArticlesViewModel.NewsViewModelFactory by inject()
+
+    private val articlesViewModel: ArticlesViewModel by lazy {
+        ViewModelProviders.of(this, articlesViewModelFactory).get(ArticlesViewModel::class.java)
     }
 
     private val sourceId: String by lazy {
@@ -49,7 +52,7 @@ class ArticlesActivity : AppCompatActivity() {
     }
 
     private fun setTopHeadlineArticlesBanners() {
-        newsViewModel.fetchTopHeadlineArticles(sourceId).observe(this, Observer {
+        articlesViewModel.fetchTopHeadlineArticles(sourceId).observe(this, Observer {
             var viewPagerAdapter = TopHeadlineBannerAdapter(this, it)
             top_headline_banners.adapter = viewPagerAdapter
 
@@ -58,7 +61,7 @@ class ArticlesActivity : AppCompatActivity() {
     }
 
     private fun setEverythingArticlesList() {
-        newsViewModel.fetchEverythingArticles(sourceId).observe(this, Observer {
+        articlesViewModel.fetchEverythingArticles(sourceId).observe(this, Observer {
             var recyclerViewAdapter = TopHeadlineListAdapter(it)
             top_headline_list.adapter = recyclerViewAdapter
             top_headline_list.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
