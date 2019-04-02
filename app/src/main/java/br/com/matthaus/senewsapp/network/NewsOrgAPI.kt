@@ -1,5 +1,6 @@
 package br.com.matthaus.senewsapp.network
 
+import br.com.matthaus.senewsapp.models.Sources
 import br.com.matthaus.senewsapp.models.TopHeadlineArticles
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -11,10 +12,13 @@ import retrofit2.http.Query
 interface NewsOrgAPI {
 
     @GET("top-headlines")
-    fun getHeadlineArticles(@Query("country") country: String, @Query("pageSize") pageSize: Int): Call<TopHeadlineArticles>
+    fun getHeadlineArticles(@Query("sources") sources: String, @Query("pageSize") pageSize: Int): Call<TopHeadlineArticles>
 
     @GET("everything")
-    fun getEverythingArticlesByKeyword(@Query("q") keyword: String, @Query("language") language: String, @Query("page") page: Int): Call<TopHeadlineArticles>
+    fun getEverythingArticlesByKeyword(@Query("sources") sources: String, @Query("page") page: Int): Call<TopHeadlineArticles>
+
+    @GET("sources")
+    fun getSources(@Query("language") language: String): Call<Sources>
 
     companion object {
         fun getInstance(): NewsOrgAPI {

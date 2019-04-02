@@ -1,4 +1,4 @@
-package br.com.matthaus.senewsapp.features.adapters
+package br.com.matthaus.senewsapp.features.articles.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -39,8 +39,12 @@ class TopHeadlineListAdapter(private val data: List<TopHeadlineArticle>) :
 
             title.text = topHeadlineArticle.title
             date.text = formatter.format(topHeadlineArticle.publishedAt)
-            if (topHeadlineArticle.urlToImage.isNotEmpty())
-                Picasso.with(context).load(topHeadlineArticle.urlToImage).into(image)
+            Picasso
+                .with(context)
+                .load(topHeadlineArticle.urlToImage)
+                .placeholder(R.drawable.no_photo_available)
+                .error(R.drawable.no_photo_available)
+                .into(image)
         }
 
     }

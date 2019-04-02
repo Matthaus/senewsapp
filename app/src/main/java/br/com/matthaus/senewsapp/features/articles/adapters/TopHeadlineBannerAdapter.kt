@@ -1,4 +1,4 @@
-package br.com.matthaus.senewsapp.features.adapters
+package br.com.matthaus.senewsapp.features.articles.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

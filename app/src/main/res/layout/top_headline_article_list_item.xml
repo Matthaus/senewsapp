@@ -15,7 +15,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="centerCrop"
-            tools:src="@tools:sample/backgrounds/scenic"/>
+            tools:src="@tools:sample/backgrounds/scenic"
+            android:importantForAccessibility="no"/>
 
     <TextView
             android:id="@+id/top_headline_list_item_date"
