@@ -4,12 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import br.com.matthaus.senewsapp.models.TopHeadlineArticle
-import br.com.matthaus.senewsapp.network.NewsOrgAPI
 import br.com.matthaus.senewsapp.repositories.TopHeadlineArticleRepository
 
 const val MAX_ARTICLE_BANNERS = 5
 
-class NewsViewModel(val topHeadlineArticleRepository: TopHeadlineArticleRepository) : ViewModel() {
+class ArticlesViewModel(val topHeadlineArticleRepository: TopHeadlineArticleRepository) : ViewModel() {
 
     private val topHeadlineArticles: MutableLiveData<List<TopHeadlineArticle>> =
         MutableLiveData<List<TopHeadlineArticle>>()
@@ -42,9 +41,10 @@ class NewsViewModel(val topHeadlineArticleRepository: TopHeadlineArticleReposito
         }
     }
 
-    class NewsViewModelFactory : ViewModelProvider.Factory {
+    class NewsViewModelFactory(val topHeadlineArticleRepository: TopHeadlineArticleRepository) :
+        ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return NewsViewModel(TopHeadlineArticleRepository(NewsOrgAPI.getInstance())) as T
+            return ArticlesViewModel(topHeadlineArticleRepository) as T
         }
     }
 

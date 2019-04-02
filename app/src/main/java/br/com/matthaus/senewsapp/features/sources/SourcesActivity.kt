@@ -15,11 +15,14 @@ import br.com.matthaus.senewsapp.features.sources.adapters.SourcesListAdapter
 import br.com.matthaus.senewsapp.viewmodel.SourcesViewModel
 import kotlinx.android.synthetic.main.activity_sources.*
 import kotlinx.android.synthetic.main.loader.*
+import org.koin.android.ext.android.inject
 
 class SourcesActivity : AppCompatActivity() {
 
+    private val sourcesViewModelFactory: SourcesViewModel.SourcesViewModelFactory by inject()
+
     private val sourcesViewModel: SourcesViewModel by lazy {
-        ViewModelProviders.of(this, SourcesViewModel.SourcesViewModelFactory()).get(SourcesViewModel::class.java)
+        ViewModelProviders.of(this, sourcesViewModelFactory).get(SourcesViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

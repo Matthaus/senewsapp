@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import br.com.matthaus.senewsapp.R
 import br.com.matthaus.senewsapp.models.TopHeadlineArticle
+import br.com.matthaus.senewsapp.utils.DateUtils
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.top_headline_article_banner_item.view.*
-import java.text.SimpleDateFormat
 
 class TopHeadlineBannerAdapter(val context: Context, val data: List<TopHeadlineArticle>) : PagerAdapter() {
 
@@ -22,11 +22,13 @@ class TopHeadlineBannerAdapter(val context: Context, val data: List<TopHeadlineA
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val itemView = layoutInflater.inflate(R.layout.top_headline_article_banner_item, container, false)
-        Picasso.with(context).load(data[position].urlToImage).into(itemView.top_headline_banner_image)
-        itemView.top_headline_banner_title.text = data[position].title
 
-        var formatter = SimpleDateFormat("dd MMMM yyyy - HH:mm")
-        itemView.top_headline_banner_date.text = formatter.format(data[position].publishedAt)
+        with(data[position]) {
+            Picasso.with(context).load(urlToImage).into(itemView.top_headline_banner_image)
+            itemView.top_headline_banner_title.text = title
+            itemView.top_headline_banner_date.text = DateUtils.formatDatetoString(publishedAt)
+            itemView.top_headline_banner_author.text = author
+        }
 
         container.addView(itemView)
 
