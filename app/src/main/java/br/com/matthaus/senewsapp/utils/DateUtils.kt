@@ -7,7 +7,9 @@ class DateUtils {
 
     companion object {
 
-        private val formatter = SimpleDateFormat("dd MMMM yyyy - HH:mm")
+        private val DEFAULT_DATE_PATTERN = "dd MMMM yyyy - HH:mm"
+
+        private val formatter = SimpleDateFormat(DEFAULT_DATE_PATTERN, Locale.US)
 
         fun formatDatetoString(date: Date) = formatter.format(date)
     }
